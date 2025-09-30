@@ -32,10 +32,6 @@ public class DemoController {
         return demoService.HelloWord("João");
     }
 
-    @PostMapping("")
-    public String HelloWordPost(@RequestBody User body) {
-        return "Hellor Word " + body.getName();
-    }
     
     @PostMapping("/autenticar")
     public ResponseEntity<String> autenticar(@RequestBody User user) {
