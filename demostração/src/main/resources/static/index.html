@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Autenticar</title>
+</head>
+<body>
+  <h1>Autenticar</h1>
+  <input id="nome" placeholder="Nome" /><br><br>
+  <input id="email" type="email" placeholder="Email" /><br><br>
+  <button onclick="Autenticar()">Entrar</button>
+
+  <p id="erro" style="color: red;"></p>
+
+  <script>
+    function Autenticar() {
+      const name = document.getElementById("nome").value;
+      const email = document.getElementById("email").value;
+      const erro = document.getElementById("erro");
+
+      fetch("http://localhost:8080/helloworld/autenticar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name, email })
+      })
+      .then(res => {
+        if (res.ok) {
+          window.location.href = "/home.html";
+        } else {
+          return res.text().then(texto => erro.textContent = texto);
+        }
+      })
+      .catch(err => {
+        erro.textContent = "Erro de rede.";
+        console.error(err);
+      });
+    }
+  </script>
+</body>
+</html>

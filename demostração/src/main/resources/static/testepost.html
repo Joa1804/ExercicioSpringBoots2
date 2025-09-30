@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Post</title>
+</head>
+<body>
+    <h1>Enviar nome via Post</h1>
+    <input id="nome" placeholder="Digite seu nome" />
+    <button onclick="enviar()">Enviar</button>
+
+    <script>
+        function enviar() {
+            const name = document.getElementById('nome').value;
+
+            fetch('http://localhost:8080/helloworld', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({  name })
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        }
+    </script>
+
+    
+</body>
+</html>
